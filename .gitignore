@@ -1,4 +1,4 @@
-# Exclude all .wav files globally
+# Exclude .wav files
 *.wav
 
 # Proiect3-specific rules
@@ -6,7 +6,8 @@
 /Proiect3/nbbuild/
 /Proiect3/dist/
 /Proiect3/build/
-/Proiect3/*.wav
+/Proiect3/*.xml
+!/Proiect3/build.xml
 
 # OS-specific files
 .DS_Store
