@@ -1,2 +1,26 @@
-
+# Exclude all .wav files globally
 *.wav
+
+# Proiect3-specific rules
+/Proiect3/nbproject/private/
+/Proiect3/nbbuild/
+/Proiect3/dist/
+/Proiect3/build/
+/Proiect3/*.wav
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Java-specific files
+*.class
+*.jar
+*.war
+*.ear
+
+# General temporary files
+*.tmp
+*.log
+*.bak
+*~
