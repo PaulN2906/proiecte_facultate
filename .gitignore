@@ -2,29 +2,29 @@
 *.wav
 
 # Proiect3-specific rules
-/Proiect3/nbproject/private/      # NetBeans environment-specific settings
-/Proiect3/nbproject/build-impl.xml # NetBeans auto-generated build file
-/Proiect3/nbproject/genfiles.properties # NetBeans generated properties file
-/Proiect3/nbbuild/               # NetBeans build directory
-/Proiect3/dist/                  # NetBeans distribution directory
-/Proiect3/build/                 # NetBeans build directory
-/Proiect3/manifest.mf            # Auto-generated manifest file
-/Proiect3/*.xml                  # Exclude all XML files...
-!/Proiect3/build.xml             # ...except build.xml
+/Proiect3/nbproject/private/
+/Proiect3/nbproject/build-impl.xml
+/Proiect3/nbproject/genfiles.properties
+/Proiect3/nbbuild/
+/Proiect3/dist/
+/Proiect3/build/
+/Proiect3/manifest.mf
+/Proiect3/*.xml
+!/Proiect3/build.xml
 
 # OS-specific files
-.DS_Store                         # macOS-specific metadata
-Thumbs.db                         # Windows thumbnail cache
-Desktop.ini                       # Windows desktop configuration
+.DS_Store
+Thumbs.db
+Desktop.ini
 
 # Java-specific files
-*.class                           # Java compiled files
-*.jar                             # Java archive files
-*.war                             # Web application archive files
-*.ear                             # Enterprise archive files
+*.class
+*.jar
+*.war
+*.ear
 
 # General temporary files
-*.tmp                             # Temporary files
-*.log                             # Log files
-*.bak                             # Backup files
-*~                                # Backup files created by some editors
+*.tmp
+*.log
+*.bak
+*~
