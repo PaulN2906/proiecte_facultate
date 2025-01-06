@@ -23,6 +23,7 @@ class SimpleAudioEditor(QMainWindow):
 
         pygame.mixer.init()
 
+# Initializare interfata grafica
     def initUI(self):
         self.setWindowTitle("Simple Audio Editor")
         self.setGeometry(200, 200, 600, 400)
@@ -123,6 +124,7 @@ class SimpleAudioEditor(QMainWindow):
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_progress)
 
+# Functie pentru incarcarea unui fisier audio
     def load_audio(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Open Audio File", "", "Audio Files (*.mp3 *.wav)")
         if file_path:
@@ -136,6 +138,7 @@ class SimpleAudioEditor(QMainWindow):
             except Exception as e:
                 self.status_label.setText(f"Error loading file: {e}")
 
+# Functie pentru inregistrarea audio din aplicatie
     def record_audio(self):
         duration, ok = QInputDialog.getInt(self, "Record Audio", "Enter duration in seconds:", 5, 1, 300, 1)
         if ok:
@@ -145,6 +148,7 @@ class SimpleAudioEditor(QMainWindow):
             self.total_time = len(self.audio_segment) / 1000
             self.status_label.setText("Recording complete and loaded into editor")
 
+# Functie auxiliara pentru inregistrarea audio si salvarea intr-un fisier temporar
     def perform_record_audio(self, duration):
         temp_file = tempfile.mktemp(suffix=".wav")
         samplerate = 44100
@@ -158,6 +162,7 @@ class SimpleAudioEditor(QMainWindow):
             wf.writeframes(recording.tobytes())
         return temp_file
 
+# Functie pentru redarea audio
     def play_audio(self):
         if self.audio_file:
             self.is_playing = True
@@ -169,18 +174,21 @@ class SimpleAudioEditor(QMainWindow):
         else:
             self.status_label.setText("Please load an audio file first.")
 
+# Functie pentru pauzarea redarii audio
     def pause_audio(self):
         if self.is_playing and not self.is_paused:
             self.is_paused = True
             pygame.mixer.music.pause()
             self.status_label.setText("Playback paused")
 
+# Functie pentru reluarea redarii audio dupa pauza
     def resume_audio(self):
         if self.is_playing and self.is_paused:
             self.is_paused = False
             pygame.mixer.music.unpause()
             self.status_label.setText("Resuming playback")
 
+# Functie pentru oprirea redarii audio
     def stop_audio(self):
         if self.is_playing:
             self.is_playing = False
@@ -192,18 +200,21 @@ class SimpleAudioEditor(QMainWindow):
             self.update_progress_label()
             self.status_label.setText("Playback stopped")
 
+# Functie pentru derularea audio inainte cu 5 secunde
     def go_forward(self):
         if self.is_playing:
             self.current_time = min(self.current_time + 5, self.total_time)
             pygame.mixer.music.set_pos(self.current_time)
             self.update_progress_label()
 
+# Functie pentru derularea audio inapoi cu 5 secunde
     def go_backward(self):
         if self.is_playing:
             self.current_time = max(self.current_time - 5, 0)
             pygame.mixer.music.set_pos(self.current_time)
             self.update_progress_label()
 
+# Functie pentru decuparea unui interval audio selectat
     def trim_audio(self):
         if self.audio_segment:
             start_time, ok1 = QInputDialog.getInt(self, "Trim Audio", "Enter start time in seconds:", 0, 0, int(self.total_time), 1)
@@ -234,6 +245,7 @@ class SimpleAudioEditor(QMainWindow):
             else:
                 self.status_label.setText("Invalid trim range")
 
+# Functie pentru aplicarea filtrului de voce groasa
     def deepen_voice_filter(self):
         if self.audio_segment:
             try:
@@ -245,6 +257,7 @@ class SimpleAudioEditor(QMainWindow):
             except Exception as e:
                 self.status_label.setText(f"Error applying filter: {e}")
 
+# Functie pentru aplicarea filtrului de voce subtire
     def squeaky_voice_filter(self):
         if self.audio_segment:
             try:
@@ -256,6 +269,7 @@ class SimpleAudioEditor(QMainWindow):
             except Exception as e:
                 self.status_label.setText(f"Error applying filter: {e}")
 
+# Functie pentru exportarea fisierului audio editat
     def export_audio(self):
         if self.audio_segment:
             file_path, _ = QFileDialog.getSaveFileName(self, "Export Audio", "", "Audio Files (*.mp3 *.wav)")
@@ -266,9 +280,11 @@ class SimpleAudioEditor(QMainWindow):
                 except Exception as e:
                     self.status_label.setText(f"Error exporting audio: {e}")
 
+# Functie pentru setarea volumului redarii audio
     def set_volume(self, value):
         pygame.mixer.music.set_volume(value / 100)
 
+# Functie pentru actualizarea progresului redarii audio
     def update_progress(self):
         if self.is_playing and not self.is_paused:
             self.current_time += 0.1
@@ -282,6 +298,7 @@ class SimpleAudioEditor(QMainWindow):
                 self.progress.setValue(progress_value)
                 self.update_progress_label()
 
+# Functie pentru actualizarea progresului redarii audio
     def update_progress_label(self):
         current_minutes = int(self.current_time // 60)
         current_seconds = int(self.current_time % 60)
@@ -289,6 +306,7 @@ class SimpleAudioEditor(QMainWindow):
         total_seconds = int(self.total_time % 60)
         self.progress_label.setText(f"{current_minutes}:{current_seconds:02d} / {total_minutes}:{total_seconds:02d}")
 
+# Punctul de intrare in aplicatie
 if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)
